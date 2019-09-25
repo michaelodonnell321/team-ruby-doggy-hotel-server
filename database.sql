@@ -2,15 +2,13 @@
 -- in a database named
 -- pet_hotel
 
-CREATE TABLE "owners"
-(
+CREATE TABLE "owners" (
     id serial PRIMARY KEY,
     "name" VARCHAR (100),
     "number_of_pets" INT
 );
 
-CREATE TABLE "pets"
-(
+CREATE TABLE "pets" (
     id serial PRIMARY KEY,
     "owner_id" INT REFERENCES "owners",
     "pet" VARCHAR (100),
