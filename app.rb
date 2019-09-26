@@ -27,7 +27,14 @@ get '/owners' do
 end 
 
 post '/' do
-   'Put this in your pipe and smoke it!'
+    @owner_id = params[:owner_id]
+    @pet = params[:pet]
+    @color = params[:color]
+    @breed = params[:breed]
+    payload = params
+    payload = JSON.parse(request.body.read).symbolize_keys unless params[:path]
+    rows = conn.exec("INSERT into pets (owner_id, pet, color, breed) values (#@owner_id, #@pet, #@color, #@breed);"
+    file = load_app.sitemap.find_resource_by_path payload[:path]
 end
 
 patch '/' do
