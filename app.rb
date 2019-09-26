@@ -21,7 +21,7 @@ end
 
 get '/owners' do
     content_type :json
-    rows = conn.exec("select owners.id, owners.name, count(*) as number_of_pets from owners join pets on pets.owner_id = owners.id group by owners.name")
+    rows = conn.exec("select owners.id, owners.name, owners.id, count(*) as number_of_pets from owners join pets on pets.owner_id = owners.id group by owners.id")
     # rows = conn.exec("SELECT * FROM owners")
     rows.map { |row| Hash[row.each_pair.to_a]}.to_json
 end 
