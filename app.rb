@@ -21,13 +21,15 @@ end
 
 get '/owners' do
     content_type :json
-    rows = conn.exec("select * from owners")
+    rows = conn.exec("select owners.name, count(*) as number_of_pets from owners join pets on pets.owner_id = owners.id group by owners.name")
+    # rows = conn.exec("SELECT * FROM owners")
     rows.map { |row| Hash[row.each_pair.to_a]}.to_json
-end
+end 
 
 post '/' do
    'Put this in your pipe and smoke it!'
 end
+
 patch '/' do
    'Cock your hat - angles are attitudes.'
 end
