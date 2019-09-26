@@ -13,9 +13,18 @@ conn = PG.connect(dbname: 'pet_hotel')
 # p rows.each { |row| p row}
 
 get '/history' do
-   rows = conn.exec("select * from pets")
-   p rows.each { |row| p row}
+    content_type :json
+    rows = conn.exec("select * from pets")
+    # rows.map - rows is an array, map returns a new array
+    rows.map { |row| Hash[row.each_pair.to_a]}.to_json
 end
+
+get '/owners' do
+    content_type :json
+    rows = conn.exec("select * from owners")
+    rows.map { |row| Hash[row.each_pair.to_a]}.to_json
+end
+
 post '/' do
    'Put this in your pipe and smoke it!'
 end
